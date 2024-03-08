@@ -10,14 +10,25 @@
     <body>
         <h1>lookaway</h1>
         <p>only the spouter should be looking at the screen now!</p>
+        <div id="countdown">3</div>
 
         <!-- Include Axios library -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
         <script>
-            setTimeout(function() {
-                window.location.href = '/picktopic';
-            }, 3000); // 3s automatic redirect
+            function countdownTimer(seconds) {
+                var countdownElement = document.getElementById('countdown');
+                var interval = setInterval(function() {
+                    seconds--;
+                    countdownElement.textContent = seconds;
+                    if (seconds <= 0) {
+                        clearInterval(interval);
+                        window.location.href = '/picktopic';
+                    }
+                }, 750); // 750ms interval
+            }
+
+            countdownTimer(4); // 4s countdown (including 0)
         </script>
     </body>
 </html>
