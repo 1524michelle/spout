@@ -1,3 +1,6 @@
 .env
 node_modules/
 package-lock.json
+
+# used to practice working with opanai API
+practice.js
