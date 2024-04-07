@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <h1>picktopic</h1>
-        <p>choose a topic to talk about for 30s</p>
-        <p>(it doesn't have to be truthful).</p>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <h1>picktopic</h1>
+    <p>choose a topic to talk about for 30s</p>
+    <p>(it doesn't have to be truthful).</p>
 
-        <button>topic 1</button>
-        <button>topic 2</button>
-        <button>topic 3</button>
+    <button id="topic1"></button>
+    <button id="topic2"></button>
+    <button id="topic3"></button>
 
-        <!-- Include Axios library -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Include Axios library -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-        <script>
-            // todo
-        </script>
-    </body>
+    <script>
+        // Retrieve topics from the server using Axios
+        axios.get('/picktopic')
+            .then(function(response) {
+                // Extract topics from the response data
+                const topics = response.data;
+                console.log("topics: " + topics)
+
+                // Update button texts with topics
+                document.getElementById('topic1').textContent = topics.topic[0];
+                document.getElementById('topic2').textContent = topics.topic[1];
+                document.getElementById('topic3').textContent = topics.topic[2];
+            })
+            .catch(function(error) {
+                console.error('Error fetching topics:', error);
+            });
+    </script>
+</body>
 </html>
